@@ -1,11 +1,12 @@
-import List from "./components/List";
 import CarouselList from "./components/CarouselList";
 import requests from "./requests";
+import Navigation from "./components/Navigation";
 
 const App = () => {
   return (
     <>
-      <List />
+      <Navigation />
+
       <CarouselList title="Trending Now" fetchUrl={requests.trend} />
     </>
   );
