@@ -1,12 +1,10 @@
-.navbar-body{
-    width: 100%;
-    
+.navbar-body {
+  width: 100%;
 }
-img{
-    padding-left: 50px;
-}
-
-.navbar-right{
-    padding-right: 50px;
+.logo {
+  padding-left: 15px;
 }
 
+.navbar-right {
+  padding-right: 25px;
+}

@@ -1,9 +1,7 @@
 import { Carousel, Card, Stack } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
 import axios from "../axios";
-import requests from "../requests";
 
-import ei8 from "../assets/ei8.png";
 import ei9 from "../assets/ei9.png";
 import ei10 from "../assets/ei10.png";
 
@@ -32,6 +30,14 @@ use map function with index, stop mapping them depending on the size of the wind
 if at this dimension, map the array from this to whatever amount is set to the dimension
 */
 
+function testFunction(low, max) {
+  return low * max;
+}
+const [windowSize, setWindowSize] = useState([
+  window.innerWidth,
+  window.innerHeight,
+]);
+
 const CarouselList = ({ title, fetchUrl }: Props) => {
   // get data
   const [movies, setMovies] = useState([]);
@@ -44,6 +50,8 @@ const CarouselList = ({ title, fetchUrl }: Props) => {
     fetchData();
   }, [fetchUrl]);
   console.log(movies);
+
+  const renderCarousel = () => {};
 
   // render posters
   const renderItemsSec = movies.map((movie) => (
@@ -73,7 +81,6 @@ const CarouselList = ({ title, fetchUrl }: Props) => {
           <Stack className="carousel_page" direction="horizontal">
             {
               renderItems
-
               /*
 								gotta make that
 							*/

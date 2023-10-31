@@ -8,7 +8,8 @@ const Navigation = () => {
     <Navbar className="navbar-body" variant="dark">
       <Navbar.Brand href="home" className="logo">
         <img
-          src="src\assets\logo\netflix_logo.svg"
+          className="logo"
+          src="src\assets\netflix_logo.svg"
           width="145"
           height="50"
           alt=""
