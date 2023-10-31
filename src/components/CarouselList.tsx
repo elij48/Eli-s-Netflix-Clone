@@ -12,6 +12,7 @@ import ei10 from "../assets/ei10.png";
     -> Carousel -> Item -> Stack -> Card
     . limit number of items in a carousel items depending on size 
         = design it dynamically, not statically
+I HAVE NO IDEA HOW TO DO THIS SHITTY LIFE
 */
 const base_URL = `https://image.tmdb.org/t/p/original`;
 
