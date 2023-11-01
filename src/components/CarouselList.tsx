@@ -34,12 +34,24 @@ if at this dimension, map the array from this to whatever amount is set to the d
 function testFunction(low, max) {
   return low * max;
 }
-const [windowSize, setWindowSize] = useState([
-  window.innerWidth,
-  window.innerHeight,
-]);
 
 const CarouselList = ({ title, fetchUrl }: Props) => {
+  // get window size
+  function useWindowSize() {
+    const [windowSize, setWindowSize] = useState([
+      window.innerWidth,
+      window.innerHeight,
+    ]);
+    useEffect(() => {
+      const handleResize = () => {
+        setWindowSize([window.innerWidth, window.innerHeight]);
+      };
+      window.addEventListener("resize", handleResize);
+    }, []);
+    return windowSize;
+  }
+  const [windowHeight, windowWidth] = useWindowSize();
+
   // get data
   const [movies, setMovies] = useState([]);
   useEffect(() => {
@@ -52,8 +64,37 @@ const CarouselList = ({ title, fetchUrl }: Props) => {
   }, [fetchUrl]);
   console.log(movies);
 
-  const renderCarousel = () => {};
-
+  //math.ceil to get number of items
+  function getCarousel(nMovies, nItem) {
+    const renderCarousel = () => {
+      <Carousel interval={null}>
+        <Carousel.Item>
+          <Stack className="carousel_page" direction="horizontal">
+            {
+              renderItems
+              /*
+								gotta make that
+							*/
+            }
+          </Stack>
+        </Carousel.Item>
+        <Carousel.Item>
+          <Stack className="carousel_page" direction="horizontal">
+            if (condition) {}
+          </Stack>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img src={ei10} />
+          <Carousel.Caption>
+            <h3>Third slide label</h3>
+            <p>
+              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+            </p>
+          </Carousel.Caption>
+        </Carousel.Item>
+      </Carousel>;
+    };
+  }
   // render posters
   const renderItemsSec = movies.map((movie) => (
     <Card className="card" style={{ width: "18rem" }}>
@@ -81,7 +122,7 @@ const CarouselList = ({ title, fetchUrl }: Props) => {
         <Carousel.Item>
           <Stack className="carousel_page" direction="horizontal">
             {
-              renderItems
+              renderItems.slice(0, 6)
               /*
 								gotta make that
 							*/
@@ -89,11 +130,9 @@ const CarouselList = ({ title, fetchUrl }: Props) => {
           </Stack>
         </Carousel.Item>
         <Carousel.Item>
-          <img src={ei9} />
-          <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </Carousel.Caption>
+          <Stack className="carousel_page" direction="horizontal">
+            if (condition) {}
+          </Stack>
         </Carousel.Item>
         <Carousel.Item>
           <img src={ei10} />
