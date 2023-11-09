@@ -2,9 +2,6 @@ import { Carousel, Card, Stack } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
 import axios from "../axios";
 
-import ei9 from "../assets/ei9.png";
-import ei10 from "../assets/ei10.png";
-
 /*
 - disable autoscroll of carousel''''
 - move the sliders
@@ -12,16 +9,17 @@ import ei10 from "../assets/ei10.png";
     -> Carousel -> Item -> Stack -> Card
     . limit number of items in a carousel items depending on size 
         = design it dynamically, not statically
-I HAVE NO IDEA HOW TO DO THIS SHITTY LIFE
 */
 const base_URL = `https://image.tmdb.org/t/p/original`;
 
 interface Props {
   title: string;
   fetchUrl: string;
+  itemAmt: Number;
 }
 
 /*
+USED A SLICE FUNCTION----
 use map function with index, stop mapping them depending on the size of the window/device
  - if at this index at certain breakpoint, stop mapping 
 		- if certain amount is reached, stop at that index, and carry over to the next carousel.item
@@ -31,11 +29,8 @@ use map function with index, stop mapping them depending on the size of the wind
 if at this dimension, map the array from this to whatever amount is set to the dimension
 */
 
-function testFunction(low, max) {
-  return low * max;
-}
-
-const CarouselList = ({ title, fetchUrl }: Props) => {
+const CarouselList = ({ title, fetchUrl, itemAmt }: Props) => {
+  /*
   // get window size
   function useWindowSize() {
     const [windowSize, setWindowSize] = useState([
@@ -51,7 +46,7 @@ const CarouselList = ({ title, fetchUrl }: Props) => {
     return windowSize;
   }
   const [windowHeight, windowWidth] = useWindowSize();
-
+   */
   // get data
   const [movies, setMovies] = useState([]);
   useEffect(() => {
@@ -64,46 +59,45 @@ const CarouselList = ({ title, fetchUrl }: Props) => {
   }, [fetchUrl]);
   console.log(movies);
 
-  //math.ceil to get number of items
+  // math.ceil to get number of  carousel items
+  // nItem depends on window size
   function getCarousel(nMovies, nItem) {
-    const renderCarousel = () => {
-      <Carousel interval={null}>
-        <Carousel.Item>
-          <Stack className="carousel_page" direction="horizontal">
-            {
-              renderItems
-              /*
-								gotta make that
-							*/
-            }
-          </Stack>
-        </Carousel.Item>
-        <Carousel.Item>
-          <Stack className="carousel_page" direction="horizontal">
-            if (condition) {}
-          </Stack>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img src={ei10} />
-          <Carousel.Caption>
-            <h3>Third slide label</h3>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
-          </Carousel.Caption>
-        </Carousel.Item>
-      </Carousel>;
-    };
+    const nCarouselItems = Math.ceil(nMovies / nItem);
+    console.log(nCarouselItems);
+
+    if (nCarouselItems === 4) {
+      // 4 carousel items
+      return (
+        <Carousel interval={null}>
+          {getCarouselItems(0, nItem)}
+          {getCarouselItems(nItem, nItem * 2)}
+          {getCarouselItems(nItem * 2, nItem * 3)}
+          {getCarouselItems(nItem * 3, nMovies)}
+        </Carousel>
+      );
+    }
+    if (nCarouselItems === 5) {
+      return (
+        <Carousel interval={null}>
+          {getCarouselItems(0, nItem)}
+          {getCarouselItems(nItem, nItem * 2)}
+          {getCarouselItems(nItem * 2, nItem * 3)}
+          {getCarouselItems(nItem * 3, nItem * 4)}
+          {getCarouselItems(nItem * 4, nMovies)}
+        </Carousel>
+      );
+    }
   }
-  // render posters
-  const renderItemsSec = movies.map((movie) => (
-    <Card className="card" style={{ width: "18rem" }}>
-      <img
-        src={`${base_URL}${movie["poster_path"]}`}
-        alt={`${movie["name"]}`}
-      />
-    </Card>
-  ));
+
+  function getCarouselItems(start, end) {
+    return (
+      <Carousel.Item>
+        <Stack className="carousel_page" direction="horizontal">
+          {renderItems.slice(start, end)}
+        </Stack>
+      </Carousel.Item>
+    );
+  }
 
   // render posters
   const renderItems = movies.map((movie) => (
@@ -118,32 +112,7 @@ const CarouselList = ({ title, fetchUrl }: Props) => {
   return (
     <>
       <h2>{title}</h2>
-      <Carousel interval={null}>
-        <Carousel.Item>
-          <Stack className="carousel_page" direction="horizontal">
-            {
-              renderItems.slice(0, 6)
-              /*
-								gotta make that
-							*/
-            }
-          </Stack>
-        </Carousel.Item>
-        <Carousel.Item>
-          <Stack className="carousel_page" direction="horizontal">
-            if (condition) {}
-          </Stack>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img src={ei10} />
-          <Carousel.Caption>
-            <h3>Third slide label</h3>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
-          </Carousel.Caption>
-        </Carousel.Item>
-      </Carousel>
+      {getCarousel(movies.length, itemAmt)}
     </>
   );
 };
