@@ -1,0 +1,31 @@
+.player-wrapper {
+  position: relative;
+  padding-top: 56.25%; /* 720 / 1280 = 0.5625 */
+}
+
+.player {
+  position: absolute;
+  top: 5%;
+  left: 0;
+}
+
+.video-details {
+  position: absolute;
+  display: block;
+  top: 45%;
+  left: 7%;
+  bottom: 0;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 500px;
+}
+
+.vid-title {
+  font-size: 55px;
+  font-weight: bold;
+}
+
+.vid-summary {
+  font-size: 21px;
+  font-weight: 0;
+}

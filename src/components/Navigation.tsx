@@ -5,7 +5,7 @@ import "./Navigation.css";
 
 const Navigation = () => {
   return (
-    <Navbar className="navbar-body" variant="dark">
+    <Navbar className="navbar-body" variant="dark" fixed="top">
       <Navbar.Brand href="home" className="logo">
         <img
           className="logo"

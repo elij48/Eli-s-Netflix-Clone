@@ -2,13 +2,8 @@ import { Carousel, Card, Stack } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
 import axios from "../axios";
 
-/*
-- disable autoscroll of carousel''''
-- move the sliders
-- have x number of items in a carousel item
-    -> Carousel -> Item -> Stack -> Card
-    . limit number of items in a carousel items depending on size 
-        = design it dynamically, not statically
+/* TODO
+- move the sliders and page scroll thingy
 */
 const base_URL = `https://image.tmdb.org/t/p/original`;
 
@@ -30,23 +25,6 @@ if at this dimension, map the array from this to whatever amount is set to the d
 */
 
 const CarouselList = ({ title, fetchUrl, itemAmt }: Props) => {
-  /*
-  // get window size
-  function useWindowSize() {
-    const [windowSize, setWindowSize] = useState([
-      window.innerWidth,
-      window.innerHeight,
-    ]);
-    useEffect(() => {
-      const handleResize = () => {
-        setWindowSize([window.innerWidth, window.innerHeight]);
-      };
-      window.addEventListener("resize", handleResize);
-    }, []);
-    return windowSize;
-  }
-  const [windowHeight, windowWidth] = useWindowSize();
-   */
   // get data
   const [movies, setMovies] = useState([]);
   useEffect(() => {
@@ -57,16 +35,12 @@ const CarouselList = ({ title, fetchUrl, itemAmt }: Props) => {
     }
     fetchData();
   }, [fetchUrl]);
-  console.log(movies);
 
   // math.ceil to get number of  carousel items
   // nItem depends on window size
   function getCarousel(nMovies, nItem) {
     const nCarouselItems = Math.ceil(nMovies / nItem);
-    console.log(nCarouselItems);
-
     if (nCarouselItems === 4) {
-      // 4 carousel items
       return (
         <Carousel interval={null}>
           {getCarouselItems(0, nItem)}
@@ -89,6 +63,7 @@ const CarouselList = ({ title, fetchUrl, itemAmt }: Props) => {
     }
   }
 
+  // render movie batch
   function getCarouselItems(start, end) {
     return (
       <Carousel.Item>

@@ -1,6 +1,7 @@
 import CarouselList from "./components/CarouselList";
 import requests from "./requests";
 import Navigation from "./components/Navigation";
+import Banner from "./components/Banner";
 import React, { useState, useEffect } from "react";
 import "./App.css";
 
@@ -31,31 +32,38 @@ const App = () => {
   return (
     <>
       <Navigation />
-      <CarouselList
-        title="Trending Now"
-        fetchUrl={requests.trend}
-        itemAmt={carouselItemsAmt}
+      <Banner
+        title="Elemental"
+        fetchVidUrl={requests.featuredVideo}
+        fetchDeetsUrl={requests.featured}
       />
-      <CarouselList
-        title="Top Rated"
-        fetchUrl={requests.toprated}
-        itemAmt={carouselItemsAmt}
-      />
-      <CarouselList
-        title="Horror"
-        fetchUrl={requests.horror}
-        itemAmt={carouselItemsAmt}
-      />
-      <CarouselList
-        title="Action"
-        fetchUrl={requests.action}
-        itemAmt={carouselItemsAmt}
-      />
-      <CarouselList
-        title="Romance"
-        fetchUrl={requests.romance}
-        itemAmt={carouselItemsAmt}
-      />
+      <div>
+        <CarouselList
+          title="Trending Now"
+          fetchUrl={requests.trend}
+          itemAmt={carouselItemsAmt}
+        />
+        <CarouselList
+          title="Top Rated"
+          fetchUrl={requests.toprated}
+          itemAmt={carouselItemsAmt}
+        />
+        <CarouselList
+          title="Horror"
+          fetchUrl={requests.horror}
+          itemAmt={carouselItemsAmt}
+        />
+        <CarouselList
+          title="Action"
+          fetchUrl={requests.action}
+          itemAmt={carouselItemsAmt}
+        />
+        <CarouselList
+          title="Romance"
+          fetchUrl={requests.romance}
+          itemAmt={carouselItemsAmt}
+        />
+      </div>
       width: {windowWidth}
     </>
   );
