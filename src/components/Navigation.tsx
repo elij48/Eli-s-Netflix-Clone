@@ -2,10 +2,24 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 //import Container from "react-bootstrap/Container";
 import "./Navigation.css";
+import { useState } from "react";
 
 const Navigation = () => {
+  const [color, setColor] = useState(false);
+  const handleColor = () => {
+    if (window.scrollY >= 90) {
+      setColor(true);
+    } else {
+      setColor(false);
+    }
+  };
+  window.addEventListener("scroll", handleColor);
   return (
-    <Navbar className="navbar-body" variant="dark" fixed="top">
+    <Navbar
+      className={color ? "navbar navbar-bg" : "navbar"}
+      variant="dark"
+      fixed="top"
+    >
       <Navbar.Brand href="home" className="logo">
         <img
           className="logo"

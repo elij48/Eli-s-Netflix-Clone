@@ -1,4 +1,9 @@
 body {
-  background-color: black !important;
+  background-color: rgb(15, 15, 15) !important;
   color: #000;
+}
+.carousel-container {
+  display: block;
+  margin: 0px auto;
+  width: 94%;
 }

@@ -1,31 +1,85 @@
 .player-wrapper {
   position: relative;
   padding-top: 56.25%; /* 720 / 1280 = 0.5625 */
+  margin-bottom: -175px;
+  height: 25%;
 }
 
 .player {
   position: absolute;
   top: 5%;
   left: 0;
+  z-index: -1;
+  &:before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(
+      rgba(15, 15, 15, 0) 0%,
+      rgba(15, 15, 15, 0) 70%,
+      rgba(15, 15, 15, 0.2) 80%,
+      rgba(15, 15, 15, 0.7) 90%,
+      rgba(15, 15, 15, 0.9) 95%,
+      rgba(15, 15, 15, 1) 100%
+    );
+  }
 }
 
 .video-details {
   position: absolute;
   display: block;
   top: 45%;
-  left: 7%;
+  left: 5%;
   bottom: 0;
   color: #fff;
   font-family: Arial, Helvetica, sans-serif;
   width: 500px;
 }
 
+.info-wrapper {
+  height: auto;
+  display: block;
+  margin: 0px;
+}
+
 .vid-title {
   font-size: 55px;
   font-weight: bold;
+  vertical-align: middle;
+  margin-right: 25px;
 }
 
+.play-button {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 140px;
+  font-size: 25px;
+  height: 50px;
+  font-weight: bold;
+  border-radius: 4px;
+  border: 0px solid transparent;
+}
+.play-button:hover {
+  background-color: rgba(255, 255, 255, 0.75);
+  transition-duration: 0.2s;
+}
 .vid-summary {
   font-size: 21px;
   font-weight: 0;
+}
+
+.play-button img {
+  vertical-align: sub;
+  padding-right: 15px;
+}
+
+.unmute-vid {
+  width: auto;
+  border-radius: 10px;
+  border: 0px solid transparent;
+  background-color: rgba(255, 255, 255, 0.5);
 }

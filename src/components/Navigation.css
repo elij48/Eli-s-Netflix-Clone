@@ -1,6 +1,10 @@
-.navbar-body {
-  width: 100%;
+.navbar {
+  padding: 4px 10px !important;
 }
+.navbar-bg {
+  background-color: rgba(15, 15, 15, 1);
+}
+
 .logo {
   padding-left: 15px;
 }

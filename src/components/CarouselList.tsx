@@ -1,6 +1,7 @@
 import { Carousel, Card, Stack } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
 import axios from "../axios";
+import "./CarouselList.css";
 
 /* TODO
 - move the sliders and page scroll thingy
@@ -8,7 +9,7 @@ import axios from "../axios";
 const base_URL = `https://image.tmdb.org/t/p/original`;
 
 interface Props {
-  title: string;
+  genre: string;
   fetchUrl: string;
   itemAmt: Number;
 }
@@ -24,7 +25,7 @@ use map function with index, stop mapping them depending on the size of the wind
 if at this dimension, map the array from this to whatever amount is set to the dimension
 */
 
-const CarouselList = ({ title, fetchUrl, itemAmt }: Props) => {
+const CarouselList = ({ genre, fetchUrl, itemAmt }: Props) => {
   // get data
   const [movies, setMovies] = useState([]);
   useEffect(() => {
@@ -76,7 +77,7 @@ const CarouselList = ({ title, fetchUrl, itemAmt }: Props) => {
 
   // render posters
   const renderItems = movies.map((movie) => (
-    <Card className="card" style={{ width: "18rem" }}>
+    <Card style={{ width: "18rem" }}>
       <img
         src={`${base_URL}${movie["backdrop_path"]}`}
         alt={`${movie["name"]}`}
@@ -86,7 +87,7 @@ const CarouselList = ({ title, fetchUrl, itemAmt }: Props) => {
 
   return (
     <>
-      <h2>{title}</h2>
+      <div className="carousel-name">{genre}</div>
       {getCarousel(movies.length, itemAmt)}
     </>
   );

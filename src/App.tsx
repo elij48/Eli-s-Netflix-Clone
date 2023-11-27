@@ -37,34 +37,33 @@ const App = () => {
         fetchVidUrl={requests.featuredVideo}
         fetchDeetsUrl={requests.featured}
       />
-      <div>
+      <div className="carousel-container">
         <CarouselList
-          title="Trending Now"
+          genre="Trending Now"
           fetchUrl={requests.trend}
           itemAmt={carouselItemsAmt}
         />
         <CarouselList
-          title="Top Rated"
+          genre="Top Rated"
           fetchUrl={requests.toprated}
           itemAmt={carouselItemsAmt}
         />
         <CarouselList
-          title="Horror"
+          genre="Horror"
           fetchUrl={requests.horror}
           itemAmt={carouselItemsAmt}
         />
         <CarouselList
-          title="Action"
+          genre="Action"
           fetchUrl={requests.action}
           itemAmt={carouselItemsAmt}
         />
         <CarouselList
-          title="Romance"
+          genre="Romance"
           fetchUrl={requests.romance}
           itemAmt={carouselItemsAmt}
         />
       </div>
-      width: {windowWidth}
     </>
   );
 };
