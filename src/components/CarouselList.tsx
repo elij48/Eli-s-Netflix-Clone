@@ -2,7 +2,7 @@ import { Carousel, Card, Stack } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
 import axios from "../axios";
 import "./CarouselList.css";
-
+import playsvg from "../assets/triangle-play.svg";
 /* TODO
 - move the sliders and page scroll thingy
 */
@@ -26,7 +26,7 @@ if at this dimension, map the array from this to whatever amount is set to the d
 */
 
 const CarouselList = ({ genre, fetchUrl, itemAmt }: Props) => {
-  // get data
+  // get movie data from tmdb
   const [movies, setMovies] = useState([]);
   useEffect(() => {
     async function fetchData() {
@@ -36,9 +36,9 @@ const CarouselList = ({ genre, fetchUrl, itemAmt }: Props) => {
     }
     fetchData();
   }, [fetchUrl]);
-
+  console.log(movies);
   // math.ceil to get number of  carousel items
-  // nItem depends on window size
+  // nItem represents the number of items that will fit on the screen depending on window size
   function getCarousel(nMovies, nItem) {
     const nCarouselItems = Math.ceil(nMovies / nItem);
     if (nCarouselItems === 4) {
@@ -47,7 +47,7 @@ const CarouselList = ({ genre, fetchUrl, itemAmt }: Props) => {
           {getCarouselItems(0, nItem)}
           {getCarouselItems(nItem, nItem * 2)}
           {getCarouselItems(nItem * 2, nItem * 3)}
-          {getCarouselItems(nItem * 3, nMovies)}
+          {getCarouselItems(nItem * 3, nItem * 4)}
         </Carousel>
       );
     }
@@ -77,11 +77,30 @@ const CarouselList = ({ genre, fetchUrl, itemAmt }: Props) => {
 
   // render posters
   const renderItems = movies.map((movie) => (
-    <Card style={{ width: "18rem" }}>
+    <Card>
       <img
+        className="movie-img"
         src={`${base_URL}${movie["backdrop_path"]}`}
-        alt={`${movie["name"]}`}
+        alt={`${movie["title"]}`}
       />
+      <div className="hoverable-card">
+        <img
+          className="hoverable-img"
+          src={`${base_URL}${movie["backdrop_path"]}`}
+          alt={`${movie["title"]}`}
+        />
+        <div className="card-details-box">
+          <div className="card-details-container">
+            <div className="card-play" onClick={() => {}}>
+              <button className="card-button">
+                <img src={playsvg} width={15} height={15} alt="" />
+              </button>
+            </div>
+            <p className="card-name">{`${movie["title"]}`}</p>
+            <div className="card-genre">{`${movie["genre_ids"]}`}</div>
+          </div>
+        </div>
+      </div>
     </Card>
   ));
 
